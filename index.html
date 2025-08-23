@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Peta Stunting Madura</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        body { 
+            margin: 0; 
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #map { 
+            width: 100%; 
+            flex-grow: 1;
+        }
+        .info {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+        .info h4 {
+            margin: 0 0 5px;
+            color: #777;
+        }
+        .legend {
+            line-height: 18px;
+            color: #555;
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+        /* Bar Prediksi di bagian bawah layar */
+        #prediction-bar {
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            padding: 15px;
+            display: none;
+            transition: height 0.3s ease;
+        }
+        #prediction-bar.active {
+            display: block;
+        }
+        .bar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .bar-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #999;
+        }
+        .prediction-content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .prediction-value {
+            flex: 1;
+            min-width: 200px;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .prediction-factors {
+            flex: 2;
+            min-width: 300px;
+        }
+        .prediction-factors ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .high {
+            color: #d73027;
+        }
+        .medium {
+            color: #fc8d59;
+        }
+        .low {
+            color: #91cf60;
+        }
+        .map-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            font-size: 14px;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+
+    
+    <div id="prediction-bar">
+        <div class="bar-header">
+            <h3 id="region-name">Nama Kecamatan</h3>
+            <button class="close-button" onclick="closePredictionBar()">×</button>
+        </div>
+        <div class="prediction-content">
+            <div class="prediction-value" id="prediction-value">
+                Prediksi: <span>--</span>
+            </div>
+            <div class="prediction-factors">
+                <p><strong>Faktor Utama:</strong></p>
+                <ul id="prediction-factors-list">
+                    <li>Belum ada data</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // Inisialisasi peta
+        var map = L.map('map').setView([-7.0, 113.3], 9); // Koordinat Madura
+
+        // Tambahkan layer base map
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Default warna semua hijau sampai data tersedia
+        var defaultColor = '#c8cfdb';  // Hijau default
+        var stuntingData = {};  // Data akan diisi dari API
+
+        // Fungsi untuk mengambil data clustering dan memperbarui peta
+        function loadClusteringData() {
+            // Hapus overlay petunjuk setelah data dimuat
+            setTimeout(function() {
+                var overlays = document.getElementsByClassName('map-overlay');
+                if (overlays.length > 0) {
+                    overlays[0].style.opacity = '0';
+                    setTimeout(function() {
+                        overlays[0].style.display = 'none';
+                    }, 1000);
+                }
+            }, 5000);
+            
+            fetch('/api/clustering-data')
+                .then(response => response.json())
+                .then(data => {
+                    if (Object.keys(data).length > 0) {
+                        console.log("Clustering data loaded successfully");
+                        stuntingData = data; // Perbarui data stunting dengan hasil clustering
+                        
+                        // Perbarui warna pada peta
+                        if (geojsonLayer) {
+                            geojsonLayer.setStyle(function(feature) {
+                                return {
+                                    fillColor: getColor(feature),
+                                    weight: 1,
+                                    opacity: 1,
+                                    color: 'white',
+                                    dashArray: '3',
+                                    fillOpacity: 0.7
+                                };
+                            });
+                        }
+                    } else {
+                        console.log("No clustering data available yet");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error loading clustering data:", error);
+                });
+        }
+
+        // Fungsi untuk menentukan kategori berdasarkan nilai stunting
+        function getStuntingCategory(value) {
+            if (value < 20) return 'low';
+            if (value < 30) return 'medium';
+            return 'high';
+        }
+
+        // Fungsi untuk mendapatkan warna berdasarkan kategori atau nilai stunting
+        function getColor(feature) {
+            var regionId = feature.properties.GID_3;
+            var data = stuntingData[regionId];
+            
+            // Jika ada data untuk region ini
+            if (data) {
+                if (data.kategori === 'high') return '#d73027';   // Merah untuk tinggi
+                if (data.kategori === 'medium') return '#fc8d59'; // Oranye untuk sedang
+                if (data.kategori === 'low') return '#91cf60';    // Hijau untuk rendah
+                return defaultColor; // Default jika tidak ada kategori
+            }
+            
+            // Default jika tidak ada data
+            return defaultColor;  // Hijau sebagai default
+        }
+
+        // Panel informasi
+        var info = L.control();
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+
+        info.update = function (props) {
+            this._div.innerHTML = '<h4>Informasi Kecamatan</h4>' + 
+                (props ? 
+                    '<b>Kecamatan: ' + props.NAME_3 + '</b><br />' + 
+                    'Kabupaten: ' + props.NAME_2 + '<br />' +
+                    'Provinsi: ' + props.NAME_1
+                    : 'Arahkan kursor atau klik pada daerah');
+        };
+        info.addTo(map);
+
+        // Fungsi untuk menampilkan bar prediksi
+        function showPredictionBar(props) {
+            var gid = props.GID_3;
+            var data = stuntingData[gid] || { 
+                nilai: 'Data belum tersedia', 
+                kategori: 'unknown', 
+                faktorUtama: ['Belum ada data'] 
+            };
+            
+            // Update konten bar prediksi
+            document.getElementById('region-name').innerText = 'Kecamatan ' + props.NAME_3 + ', ' + props.NAME_2;
+            
+            var predictionValueElement = document.getElementById('prediction-value');
+            predictionValueElement.innerHTML = 'Prevalensi Stunting: <span class="' + 
+                data.kategori + '">' + data.nilai + '%</span>';
+            
+            var factorsListElement = document.getElementById('prediction-factors-list');
+            factorsListElement.innerHTML = '';
+            
+            data.faktorUtama.forEach(function(faktor) {
+                var li = document.createElement('li');
+                li.textContent = faktor;
+                factorsListElement.appendChild(li);
+            });
+            
+            // Tampilkan bar
+            document.getElementById('prediction-bar').classList.add('active');
+        }
+        
+        // Fungsi untuk menutup bar prediksi
+        function closePredictionBar() {
+            document.getElementById('prediction-bar').classList.remove('active');
+        }
+
+        // Fungsi highlight feature
+        function highlightFeature(e) {
+            var layer = e.target;
+            var originalColor = getColor(layer.feature); // Dapatkan warna asli berdasarkan data
+            
+            layer.setStyle({
+                weight: 3,
+                color: '#666',
+                dashArray: '',
+                fillColor: originalColor, // Pertahankan warna fill asli
+                fillOpacity: 0.8 // Sedikit lebih pekat untuk efek hover
+            });
+            
+            layer.bringToFront();
+            info.update(layer.feature.properties);
+        }
+
+        // Reset highlight
+        function resetHighlight(e) {
+            // Alih-alih memanggil resetStyle, tetapkan style secara manual
+            e.target.setStyle({
+                fillColor: getColor(e.target.feature), // Tetap gunakan warna dari data stunting
+                weight: 1,
+                opacity: 1,
+                color: 'white',
+                dashArray: '3',
+                fillOpacity: 0.7
+            });
+            
+            info.update();
+        }
+        // Zoom ke feature dengan level konsisten
+        function zoomToFeature(e) {
+            var center = e.target.getBounds().getCenter();
+            
+            // Zoom level tetap untuk semua area (11 adalah level menengah)
+            map.setView(center, 11);
+            
+            var props = e.target.feature.properties;
+            info.update(props);
+            
+            // Tampilkan bar prediksi saat diklik
+            showPredictionBar(props);
+        }
+
+        // Interaksi layer
+        function onEachFeature(feature, layer) {
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomToFeature
+            });
+        }
+
+        // Load GeoJSON
+        var geojsonLayer;
+        fetch('madura.geojson')
+            .then(response => response.json())
+            .then(data => {
+                geojsonLayer = L.geoJSON(data, {
+                    style: function(feature) {
+                        return {
+                            fillColor: defaultColor,  // Mulai dengan warna default
+                            weight: 1,
+                            opacity: 1,
+                            color: 'white',
+                            dashArray: '3',
+                            fillOpacity: 0.7
+                        };
+                    },
+                    onEachFeature: onEachFeature
+                }).addTo(map);
+                
+                // Load data clustering setelah peta dimuat
+                loadClusteringData();
+            });
+
+        // Legenda untuk tingkat stunting
+        var legend = L.control({position: 'bottomright'});
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info legend');
+            div.innerHTML += '<h4>Prevalensi Stunting</h4>';
+            
+            // Definisi rentang nilai stunting dan warnanya
+            var grades = [
+                {min: 30, label: '> 30% (Tinggi)', color: '#d73027'},
+                {min: 20, max: 30, label: '20-30% (Sedang)', color: '#fc8d59'},
+                {min: 0, max: 20, label: '< 20% (Rendah)', color: '#91cf60'},
+                {label: 'Data tidak tersedia'}
+            ];
+            
+            // Buat item legenda untuk setiap rentang nilai
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + grades[i].color + '"></i> ' +
+                    grades[i].label + '<br>';
+            }
+            
+            return div;
+        };
+        legend.addTo(map);
+    </script>
+</body>
+</html>
