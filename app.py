@@ -69,12 +69,12 @@ DUMMY_DATA = {
 @app.route('/')
 def home():
     # Mengirimkan file HTML yang telah dibuat sebagai respons
-    return send_file('index.html')
+    return send_file('templates/index.html')
 
 @app.route('/madura.geojson')
 def geojson():
     # Mengirimkan file GeoJSON
-    return send_file('madura.geojson')
+    return send_file('geojson/madura.geojson')
 
 @app.route('/api/clustering-data')
 def clustering_data():
