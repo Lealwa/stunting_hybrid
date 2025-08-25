@@ -101,9 +101,19 @@
         // Fungsi untuk mendapatkan warna berdasarkan kategori atau nilai stunting
         function getColor(feature) {
             var regionId = feature.properties.GID_3;
-            var data = stuntingData[regionId];
+            var ccId = feature.properties.CC_4;
+            var data = null;
             
-            // Jika ada data untuk region ini
+            // Cek data berdasarkan CC_3 terlebih dahulu (prioritas)
+            if (ccId && stuntingData[ccId]) {
+                data = stuntingData[ccId];
+            }
+            // Jika tidak ada data berdasarkan CC_3, gunakan GID_3
+            else if (regionId && stuntingData[regionId]) {
+                data = stuntingData[regionId];
+            }
+            
+            // Jika ada data untuk region ini (dari CC_3 atau GID_3)
             if (data) {
                 if (data.kategori === 'high') return '#d73027';   // Merah untuk tinggi
                 if (data.kategori === 'medium') return '#fc8d59'; // Oranye untuk sedang
@@ -112,7 +122,7 @@
             }
             
             // Default jika tidak ada data
-            return defaultColor;  // Hijau sebagai default
+            return defaultColor;  // Default color jika tidak ada data
         }
 
         // Panel informasi
@@ -136,14 +146,28 @@
         // Fungsi untuk menampilkan bar prediksi
         function showPredictionBar(props) {
             var gid = props.GID_3;
-            var data = stuntingData[gid] || { 
-                nilai: 'Data belum tersedia', 
-                kategori: 'unknown', 
-                faktorUtama: ['Belum ada data'] 
-            };
+            var ccId = props.CC_4;
+            var data = null;
+            
+            // Cek data berdasarkan CC_3 terlebih dahulu (prioritas)
+            if (ccId && stuntingData[ccId]) {
+                data = stuntingData[ccId];
+            }
+            // Jika tidak ada data berdasarkan CC_3, gunakan GID_3
+            else if (gid && stuntingData[gid]) {
+                data = stuntingData[gid];
+            }
+            // Jika tidak ada data sama sekali
+            else {
+                data = {
+                    nilai: 'Data belum tersedia', 
+                    kategori: 'unknown', 
+                    faktorUtama: ['Belum ada data']
+                };
+            }
             
             // Update konten bar prediksi
-            document.getElementById('region-name').innerText = 'Kecamatan ' + props.NAME_3 + ', ' + props.NAME_2;
+            document.getElementById('region-name').innerText ='Desa ' + props.NAME_4 + ' Kecamatan ' + props.NAME_3 + ', ' + props.NAME_2;
             
             var predictionValueElement = document.getElementById('prediction-value');
             predictionValueElement.innerHTML = 'Prevalensi Stunting: <span class="' + 
@@ -203,7 +227,7 @@
             var center = e.target.getBounds().getCenter();
             
             // Zoom level tetap untuk semua area (11 adalah level menengah)
-            map.setView(center, 11);
+            map.setView(center, 13);
             
             var props = e.target.feature.properties;
             info.update(props);

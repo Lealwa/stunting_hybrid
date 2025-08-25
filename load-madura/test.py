@@ -2,7 +2,7 @@ import json
 import geopandas as gpd
 
 # Read your existing GeoJSON
-gdf = gpd.read_file("indonesia3.geojson")
+gdf = gpd.read_file("geojson/indonesia4.geojson")
 
 # Print available columns to verify
 print("Available columns:", gdf.columns.tolist())

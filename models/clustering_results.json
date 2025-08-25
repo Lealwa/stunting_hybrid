@@ -1,0 +1,209 @@
+{
+  "3528010004": {
+    "nilai": 7.16,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "IDN.11.27.1_1": {
+    "nilai": 4.341666666666666,
+    "kategori": "high",
+    "faktorUtama": [
+      "Tingkat Stunting Tinggi",
+      "Perlu Intervensi Prioritas",
+      "Akses Gizi Terbatas"
+    ]
+  },
+  "3528080002": {
+    "nilai": 2.8225,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "IDN.11.27.2_1": {
+    "nilai": 4.75,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "IDN.11.27.3_1": {
+    "nilai": 16.633333333333336,
+    "kategori": "medium",
+    "faktorUtama": [
+      "Tingkat Stunting Sedang",
+      "Perlu Pengawasan",
+      "Program Gizi Perlu Ditingkatkan"
+    ]
+  },
+  "3528050017": {
+    "nilai": 5.2175,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "IDN.11.27.4_1": {
+    "nilai": 5.669999999999999,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "3528070005": {
+    "nilai": 1.355,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "3528020009": {
+    "nilai": 10.363333333333333,
+    "kategori": "medium",
+    "faktorUtama": [
+      "Tingkat Stunting Sedang",
+      "Perlu Pengawasan",
+      "Program Gizi Perlu Ditingkatkan"
+    ]
+  },
+  "IDN.11.27.6_1": {
+    "nilai": 3.7550000000000003,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "IDN.11.27.7_1": {
+    "nilai": 2.4766666666666666,
+    "kategori": "medium",
+    "faktorUtama": [
+      "Tingkat Stunting Sedang",
+      "Perlu Pengawasan",
+      "Program Gizi Perlu Ditingkatkan"
+    ]
+  },
+  "IDN.11.27.8_1": {
+    "nilai": 6.234999999999999,
+    "kategori": "medium",
+    "faktorUtama": [
+      "Tingkat Stunting Sedang",
+      "Perlu Pengawasan",
+      "Program Gizi Perlu Ditingkatkan"
+    ]
+  },
+  "3528060012": {
+    "nilai": 9.68,
+    "kategori": "medium",
+    "faktorUtama": [
+      "Tingkat Stunting Sedang",
+      "Perlu Pengawasan",
+      "Program Gizi Perlu Ditingkatkan"
+    ]
+  },
+  "IDN.11.27.9_1": {
+    "nilai": 3.2416666666666667,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "IDN.11.27.10_1": {
+    "nilai": 5.03,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "IDN.11.27.11_1": {
+    "nilai": 13.328333333333333,
+    "kategori": "medium",
+    "faktorUtama": [
+      "Tingkat Stunting Sedang",
+      "Perlu Pengawasan",
+      "Program Gizi Perlu Ditingkatkan"
+    ]
+  },
+  "IDN.11.27.5_1": {
+    "nilai": 11.4575,
+    "kategori": "medium",
+    "faktorUtama": [
+      "Tingkat Stunting Sedang",
+      "Perlu Pengawasan",
+      "Program Gizi Perlu Ditingkatkan"
+    ]
+  },
+  "3528040010": {
+    "nilai": 6.529999999999999,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "3528110007": {
+    "nilai": 4.88,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "3528050001": {
+    "nilai": 5.077500000000001,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "3528050002": {
+    "nilai": 5.077500000000001,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  },
+  "IDN.11.27.12_1": {
+    "nilai": 20.168333333333333,
+    "kategori": "high",
+    "faktorUtama": [
+      "Tingkat Stunting Tinggi",
+      "Perlu Intervensi Prioritas",
+      "Akses Gizi Terbatas"
+    ]
+  },
+  "IDN.11.27.13_1": {
+    "nilai": 4.948333333333333,
+    "kategori": "low",
+    "faktorUtama": [
+      "Tingkat Stunting Rendah",
+      "Kondisi Baik",
+      "Program Gizi Berjalan Baik"
+    ]
+  }
+}
