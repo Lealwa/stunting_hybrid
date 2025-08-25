@@ -42,7 +42,7 @@ def serve_static(filename):
 @app.route('/madura.geojson')
 def geojson():
     # Mengirimkan file GeoJSON
-    return send_file('geojson/madura1.geojson')
+    return send_file('geojson/madura.geojson')
 
 @app.route('/api/clustering-data')
 def clustering_data():
