@@ -104,3 +104,23 @@ body {
     font-size: 14px;
     max-width: 300px;
 }
+
+  #grafikContainer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 320px;   /* lebih kecil */
+    height: 220px;  /* lebih kecil */
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 9999;
+  }
+
+  #grafikContainer canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
