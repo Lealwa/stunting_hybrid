@@ -19,7 +19,7 @@ tf.random.set_seed(42)
 
 # Read and prepare data
 print("Loading data...")
-data_stunting = pd.read_csv('data_pamekasan.csv', 
+data_stunting = pd.read_csv('data/data_stunting_sampang_full.csv', 
                            sep=';',
                            encoding='utf-8',
                            quotechar='"',
