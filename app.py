@@ -1,7 +1,9 @@
 from flask import Flask, render_template, send_file, jsonify, request
 import os
 import json
+import pandas as pd
 import numpy as np
+from collections import defaultdict
 
 app = Flask(__name__)
 
@@ -33,6 +35,33 @@ CLUSTERING_DATA = load_clustering_data()
 def home():
     # Mengirimkan file HTML yang telah dibuat sebagai respons
     return send_file('templates/index.html')
+
+@app.route('/api/forecasting-data')
+def forecasting_data():
+    """Return historical and forecasting data from pre-generated JSON file"""
+    try:
+        # Get region parameter if provided
+        kecamatan = request.args.get('region', None)
+        
+        # Check for pre-generated JSON file
+        forecast_file = 'models/lstm_forecast_results.json'
+        if os.path.exists(forecast_file):
+            with open(forecast_file, 'r') as f:
+                result = json.load(f)
+        else:
+            # Fall back to direct processing if file doesn't exist
+            return jsonify({'error': 'Forecast data not found'}), 404
+        
+        # If specific kecamatan requested, return just that data
+        if kecamatan and kecamatan in result:
+            return jsonify(result[kecamatan])
+        
+        # Otherwise return all data
+        return jsonify(result)
+        
+    except Exception as e:
+        print(f"Error fetching forecasting data: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/static/<path:filename>')
 def serve_static(filename):

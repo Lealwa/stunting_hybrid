@@ -7,28 +7,53 @@
     
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Add Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     
     <link rel="stylesheet" href="/static/style.css">
+    
+    <style>
+        /* Add this inline style for the no-data message */
+        .no-data-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            font-style: italic;
+            width: 100%;
+            background-color: rgba(245, 245, 245, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
     <div id="map"></div>
-    
 
-    
-    <div id="prediction-bar">
-        <div class="bar-header">
-            <h3 id="region-name">Nama Kecamatan</h3>
-            <button class="close-button" onclick="closePredictionBar()">×</button>
-        </div>
-        <div class="prediction-content">
-            <div class="prediction-value" id="prediction-value">
-                Prediksi: <span>--</span>
+    <div id="forecast-container" class="hidden">
+        <div class="forecast-header">
+            <div class="forecast-title">
+                <h3 id="region-title">Tren Prevalensi Stunting</h3>
+                <div id="current-prevalence"></div>
             </div>
-            <div class="prediction-factors">
-                <p><strong>Faktor Utama:</strong></p>
-                <ul id="prediction-factors-list">
-                    <li>Belum ada data</li>
-                </ul>
+            <div class="forecast-controls">
+                <select id="forecast-region-selector">
+                    <option value="all_regions">Semua Kecamatan</option>
+                    <!-- Options will be populated dynamically -->
+                </select>
+                <button id="toggle-forecast-btn" onclick="toggleForecastContainer()">Sembunyikan</button>
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="forecast-chart"></canvas>
+        </div>
+        <div id="factors-container" class="hidden">
+            <div class="factors-content">
+                <ul id="factors-list"></ul>
             </div>
         </div>
     </div>
@@ -143,8 +168,8 @@
         };
         info.addTo(map);
 
-        // Fungsi untuk menampilkan bar prediksi
-        function showPredictionBar(props) {
+        // Fungsi untuk mengupdate info di forecast container
+        function updateRegionInfo(props) {
             var gid = props.GID_3;
             var ccId = props.CC_4;
             var data = null;
@@ -166,29 +191,19 @@
                 };
             }
             
-            // Update konten bar prediksi
-            document.getElementById('region-name').innerText ='Kecamatan ' + props.NAME_3 + ', ' + props.NAME_2;
+            // Update title dengan nama kecamatan
+            document.getElementById('region-title').innerText = 'Kecamatan ' + props.NAME_3;
             
-            var predictionValueElement = document.getElementById('prediction-value');
-            predictionValueElement.innerHTML = 'Prevalensi Stunting: <span class="' + 
-                data.kategori + '">' + data.nilai + '%</span>';
+            // Update nilai prevalensi
+            var categoryClass = data.kategori || 'unknown';
+            document.getElementById('current-prevalence').innerHTML = 
+                'Prevalensi Saat Ini: <span class="' + categoryClass + '">' + data.nilai + '%</span>';
             
-            var factorsListElement = document.getElementById('prediction-factors-list');
-            factorsListElement.innerHTML = '';
+
             
-            data.faktorUtama.forEach(function(faktor) {
-                var li = document.createElement('li');
-                li.textContent = faktor;
-                factorsListElement.appendChild(li);
-            });
-            
-            // Tampilkan bar
-            document.getElementById('prediction-bar').classList.add('active');
-        }
-        
-        // Fungsi untuk menutup bar prediksi
-        function closePredictionBar() {
-            document.getElementById('prediction-bar').classList.remove('active');
+            // Pastikan forecast container terlihat
+            document.getElementById('forecast-container').classList.remove('hidden');
+            document.getElementById('toggle-forecast-btn').textContent = 'Sembunyikan';
         }
 
         // Fungsi highlight feature
@@ -222,18 +237,20 @@
             
             info.update();
         }
+        
         // Zoom ke feature dengan level konsisten
         function zoomToFeature(e) {
             var center = e.target.getBounds().getCenter();
             
             // Zoom level tetap untuk semua area (11 adalah level menengah)
-            map.setView(center, 13);
+            map.setView(center, 12);
             
             var props = e.target.feature.properties;
             info.update(props);
             
-            // Tampilkan bar prediksi saat diklik
-            showPredictionBar(props);
+            // Update info di forecast container dan tampilkan forecast
+            updateRegionInfo(props);
+            updateForecastForRegion(props);
         }
 
         // Interaksi layer
@@ -272,26 +289,309 @@
         var legend = L.control({position: 'bottomright'});
         legend.onAdd = function (map) {
             var div = L.DomUtil.create('div', 'info legend');
-            div.innerHTML += '<h4>Prevalensi Stunting</h4>';
+            div.innerHTML += '<h4>Status Stunting</h4>';
             
             // Definisi rentang nilai stunting dan warnanya
             var grades = [
-                {min: 30, label: '> 30% (Tinggi)', color: '#d73027'},
-                {min: 20, max: 30, label: '20-30% (Sedang)', color: '#fc8d59'},
-                {min: 0, max: 20, label: '< 20% (Rendah)', color: '#91cf60'},
-                {label: 'Data tidak tersedia'}
+                {min: 30, label: 'Tinggi', color: '#d73027'},
+                {min: 20, max: 30, label: 'Sedang', color: '#fc8d59'},
+                {min: 0, max: 20, label: 'Rendah', color: '#91cf60'},
+                {label: 'Data tidak tersedia', color: defaultColor}
             ];
             
             // Buat item legenda untuk setiap rentang nilai
             for (var i = 0; i < grades.length; i++) {
                 div.innerHTML +=
-                    '<i style="background:' + grades[i].color + '"></i> ' +
+                    '<i style="background:' + (grades[i].color || defaultColor) + '"></i> ' +
                     grades[i].label + '<br>';
             }
             
             return div;
         };
         legend.addTo(map);
+
+        // LSTM Forecasting Chart functionality
+        let forecastChart = null;
+        let forecastData = {};
+        
+        // Function to toggle forecast container visibility
+        function toggleForecastContainer() {
+            const container = document.getElementById('forecast-container');
+            const btn = document.getElementById('toggle-forecast-btn');
+            
+            if (container.classList.contains('hidden')) {
+                container.classList.remove('hidden');
+                btn.textContent = 'Sembunyikan';
+            } else {
+                container.classList.add('hidden');
+                btn.textContent = 'Tampilkan';
+            }
+        }
+        
+        // Function to show "no data" message when forecast data isn't available
+        function showNoForecastData(regionName) {
+            const container = document.getElementById('forecast-container');
+            
+            // Update title to show the region name
+            document.getElementById('region-title').innerText = regionName ? 
+                'Kecamatan ' + regionName : 'Tren Prevalensi Stunting';
+            
+            // Clear prevalence info
+            document.getElementById('current-prevalence').innerHTML = '';
+            
+            // Hide factors container
+            document.getElementById('factors-container').classList.add('hidden');
+            
+            // Destroy existing chart if it exists
+            if (forecastChart) {
+                forecastChart.destroy();
+                forecastChart = null;
+            }
+            
+            // Get chart container and display "no data" message
+            const chartContainer = document.querySelector('.chart-container');
+            chartContainer.innerHTML = '<canvas id="forecast-chart"></canvas><div class="no-data-message">Data prediksi belum tersedia untuk wilayah ini</div>';
+            
+            // Make container visible
+            container.classList.remove('hidden');
+            document.getElementById('toggle-forecast-btn').textContent = 'Sembunyikan';
+        }
+        
+        // Function to load forecasting data
+        function loadForecastData() {
+            fetch('/api/forecasting-data')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        console.error("Error loading forecast data:", data.error);
+                        forecastData = {};
+                        return;
+                    }
+                    
+                    // Store data for later use with different regions
+                    forecastData = data;
+                    
+                    // Reset title to default for all regions view
+                    document.getElementById('region-title').innerText = 'Tren Prevalensi Stunting';
+                    document.getElementById('current-prevalence').innerHTML = '';
+                    document.getElementById('factors-container').classList.add('hidden');
+                    
+                    // Update chart with all regions data initially if it exists
+                    if (data.all_regions && !document.getElementById('forecast-container').classList.contains('hidden')) {
+                        updateForecastChart(data.all_regions);
+                    }
+                    
+                    // Populate region selector
+                    populateRegionSelector(Object.keys(data));
+                })
+                .catch(error => {
+                    console.error("Error fetching forecast data:", error);
+                    forecastData = {};
+                });
+        }
+        
+        // Function to update the forecast chart with new data
+        function updateForecastChart(data) {
+            const ctx = document.getElementById('forecast-chart').getContext('2d');
+            
+            // Check if data is empty or invalid
+            if (!data || !data.labels || !data.historical || !data.forecast) {
+                showNoForecastData();
+                return;
+            }
+            
+            // Clear any no-data message
+            const chartContainer = document.querySelector('.chart-container');
+            const noDataMessage = chartContainer.querySelector('.no-data-message');
+            if (noDataMessage) {
+                noDataMessage.remove();
+            }
+            
+            // Destroy existing chart if it exists
+            if (forecastChart) {
+                forecastChart.destroy();
+            }
+            
+            // Create new chart
+            forecastChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [
+                        {
+                            label: 'Data Historis',
+                            data: data.historical,
+                            borderColor: 'rgb(54, 162, 235)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            tension: 0.1,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Prediksi',
+                            data: data.forecast,
+                            borderColor: 'rgb(255, 99, 132)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            tension: 0.1,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            borderDash: [5, 5],
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y.toFixed(2) + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Prevalensi Stunting (%)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toFixed(1) + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Tahun'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Function to populate region selector dropdown
+        function populateRegionSelector(regions) {
+            const selector = document.getElementById('forecast-region-selector');
+            
+            // Clear existing options except the first one
+            while (selector.options.length > 1) {
+                selector.remove(1);
+            }
+            
+            // Add options for each kecamatan (skip the 'all_regions' entry)
+            regions
+                .filter(r => r !== 'all_regions')
+                .sort()
+                .forEach(region => {
+                    const option = document.createElement('option');
+                    option.value = region;
+                    option.textContent = region;
+                    selector.appendChild(option);
+                });
+        }
+        
+        // Listen for region selector changes
+        document.getElementById('forecast-region-selector').addEventListener('change', function() {
+            const selectedRegion = this.value;
+            
+            if (selectedRegion === 'all_regions') {
+                // Reset to default view for all regions
+                document.getElementById('region-title').innerText = 'Tren Prevalensi Stunting';
+                document.getElementById('current-prevalence').innerHTML = '';
+                document.getElementById('factors-container').classList.add('hidden');
+                
+                if (forecastData.all_regions) {
+                    updateForecastChart(forecastData.all_regions);
+                } else {
+                    showNoForecastData('Semua Wilayah');
+                }
+            }
+            else if (selectedRegion && forecastData[selectedRegion]) {
+                // Find matching region in map data if possible
+                let regionProps = null;
+                if (geojsonLayer) {
+                    geojsonLayer.eachLayer(function(layer) {
+                        if (layer.feature.properties.NAME_3 === selectedRegion) {
+                            regionProps = layer.feature.properties;
+                        }
+                    });
+                }
+                
+                // Update region info if we found a match
+                if (regionProps) {
+                    updateRegionInfo(regionProps);
+                } else {
+                    // Basic title update if no matching props found
+                    document.getElementById('region-title').innerText = 'Kecamatan ' + selectedRegion;
+                    document.getElementById('factors-container').classList.add('hidden');
+                }
+                
+                // Update chart
+                updateForecastChart(forecastData[selectedRegion]);
+            } else {
+                // No data for this region
+                showNoForecastData(selectedRegion);
+            }
+        });
+        
+        // When map feature is clicked, update forecast chart if possible
+        function updateForecastForRegion(props) {
+            // Try to find a matching kecamatan name
+            if (props && props.NAME_3) {
+                const regionName = props.NAME_3;
+                
+                // Check if we have forecast data for this region
+                if (forecastData[regionName]) {
+                    // Update the selector
+                    const selector = document.getElementById('forecast-region-selector');
+                    selector.value = regionName;
+                    
+                    // Update the chart
+                    updateForecastChart(forecastData[regionName]);
+                } else {
+                    // Show no data message
+                    showNoForecastData(regionName);
+                }
+            }
+        }
+        
+        // Load the forecast data when the page loads, but keep container hidden
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load forecast data after a delay to ensure map is loaded
+            setTimeout(function() {
+                loadForecastData();
+                // Make sure container remains hidden initially
+                document.getElementById('forecast-container').classList.add('hidden');
+                document.getElementById('toggle-forecast-btn').textContent = 'Tampilkan';
+            });
+        });
     </script>
 </body>
 </html>

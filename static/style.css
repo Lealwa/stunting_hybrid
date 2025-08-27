@@ -124,3 +124,81 @@ body {
     height: 100% !important;
   }
 
+  /* Add these styles to your existing CSS file */
+
+#forecast-container {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    width: 650px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    padding: 15px;
+    z-index: 1000;
+    transition: transform 0.3s ease-out;
+}
+
+#forecast-container.hidden {
+    transform: translateY(calc(100% + 30px));
+}
+
+.forecast-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.forecast-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.forecast-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+#forecast-region-selector {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#toggle-forecast-btn {
+    padding: 5px 10px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.chart-container {
+    position: relative;
+    height: 280px;
+}
+
+@media (max-width: 768px) {
+    #forecast-container {
+        width: calc(100% - 40px);
+        bottom: 10px;
+        left: 10px;
+    }
+    
+    .chart-container {
+        height: 200px;
+    }
+}
+
+.no-data-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+    font-style: italic;
+    width: 100%;
+}
