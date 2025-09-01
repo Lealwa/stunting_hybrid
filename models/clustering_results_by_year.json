@@ -1,0 +1,1092 @@
+{
+  "2020": {
+    "IDN.11.27.6_1": {
+      "nilai": 3.233151184,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.5_1": {
+      "nilai": 19.32569414,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.2_1": {
+      "nilai": 6.161971831,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.4_1": {
+      "nilai": 14.35324452,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.8_1": {
+      "nilai": 21.8113612,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.11_1": {
+      "nilai": 29.77673325,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.7_1": {
+      "nilai": 11.02777778,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.10_1": {
+      "nilai": 17.39745403,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.3_1": {
+      "nilai": 29.84022556,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.13_1": {
+      "nilai": 11.94661458,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.1_1": {
+      "nilai": 10.77834458,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.9_1": {
+      "nilai": 11.7122656,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.12_1": {
+      "nilai": 24.161980,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.12_1": {
+      "nilai": 14.91,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.14_1": {
+      "nilai": 12.99,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.8_1": {
+      "nilai": 11.05,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.2_1": {
+      "nilai": 6.28,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.7_1": {
+      "nilai": 10.14,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.5_1": {
+      "nilai": 7.63,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.3_1": {
+      "nilai": 19.29,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.13_1": {
+      "nilai": 9.32,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.1_1": {
+      "nilai": 12.24,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.9_1": {
+      "nilai": 7.65,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.4_1": {
+      "nilai": 2.17,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.6_1": {
+      "nilai": 1.94,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.11_1": {
+      "nilai": 3.59,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+        "IDN.11.31.10_1": {
+      "nilai": 7.42,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    }
+  },
+  "2021": {
+    "IDN.11.27.6_1": {
+      "nilai": 5.24,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.12_1": {
+      "nilai": 21.78,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.5_1": {
+      "nilai": 21.5,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.2_1": {
+      "nilai": 6.51,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.4_1": {
+      "nilai": 8.2,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.8_1": {
+      "nilai": 8.25,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.11_1": {
+      "nilai": 21.45,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.7_1": {
+      "nilai": 2.33,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.10_1": {
+      "nilai": 7.65,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.3_1": {
+      "nilai": 31.89,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.13_1": {
+      "nilai": 11.5,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.1_1": {
+      "nilai": 8.44,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.9_1": {
+      "nilai": 3.21,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.12_1": {
+      "nilai": 1.8,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.14_1": {
+      "nilai": 6.13,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.8_1": {
+      "nilai": 7.95,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.2_1": {
+      "nilai": 1.14,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.7_1": {
+      "nilai": 6.82,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.5_1": {
+      "nilai": 6.19,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.3_1": {
+      "nilai": 15.47,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.31.13_1": {
+      "nilai": 7.5,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.1_1": {
+      "nilai": 13.91,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.31.9_1": {
+      "nilai": 7.33,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.4_1": {
+      "nilai": 1.84,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.6_1": {
+      "nilai": 2.85,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.11_1": {
+      "nilai": 8.15,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+        "IDN.11.31.10_1": {
+      "nilai": 4.71,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    }
+  },
+  "2022": {
+    "IDN.11.27.6_1": {
+      "nilai": 0.96,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+        "IDN.11.27.12_1": {
+      "nilai": 22.38,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.5_1": {
+      "nilai": 8.68,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.2_1": {
+      "nilai": 5.03,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.4_1": {
+      "nilai": 7.17,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.8_1": {
+      "nilai": 4.22,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.11_1": {
+      "nilai": 10.81,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.7_1": {
+      "nilai": 3.76,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.10_1": {
+      "nilai": 3.35,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.3_1": {
+      "nilai": 10.05,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.13_1": {
+      "nilai": 3.01,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.1_1": {
+      "nilai": 2.74,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.9_1": {
+      "nilai": 4.7,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.12_1": {
+      "nilai": 1.58,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.14_1": {
+      "nilai": 2.26,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.8_1": {
+      "nilai": 7.3,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.2_1": {
+      "nilai": 1.8,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.7_1": {
+      "nilai": 4.8,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.5_1": {
+      "nilai": 5.13,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.3_1": {
+      "nilai": 10.05,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.13_1": {
+      "nilai": 3.37,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.1_1": {
+      "nilai": 6.28,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.9_1": {
+      "nilai": 5.52,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.4_1": {
+      "nilai": 1.32,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.6_1": {
+      "nilai": 1.11,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.11_1": {
+      "nilai": 5.41,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+        "IDN.11.31.10_1": {
+      "nilai": 8.82,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    }
+  },
+  "2023": {
+    "IDN.11.27.6_1": {
+      "nilai": 0.229042602,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+        "IDN.11.27.12_1": {
+      "nilai": 10.886674,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.5_1": {
+      "nilai": 5.491525424,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.2_1": {
+      "nilai": 3.965702036,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.4_1": {
+      "nilai": 3.589108911,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.8_1": {
+      "nilai": 2.784910132,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.11_1": {
+      "nilai": 5.743317871,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.7_1": {
+      "nilai": 0.625617386,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.10_1": {
+      "nilai": 2.764513697,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.3_1": {
+      "nilai": 6.351606805,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.13_1": {
+      "nilai": 1.871345029,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.1_1": {
+      "nilai": 1.477052928,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.9_1": {
+      "nilai": 2.5,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.31.12_1": {
+      "nilai": 8.2,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.14_1": {
+      "nilai": 5.12,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.8_1": {
+      "nilai": 8.3,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.2_1": {
+      "nilai": 2.05,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.7_1": {
+      "nilai": 5.74,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.5_1": {
+      "nilai": 5.27,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.3_1": {
+      "nilai": 12.19,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.13_1": {
+      "nilai": 3.12,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.1_1": {
+      "nilai": 5.38,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.9_1": {
+      "nilai": 2.37,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.4_1": {
+      "nilai": 3.2,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.6_1": {
+      "nilai": 1.75,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.11_1": {
+      "nilai": 3.89,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+        "IDN.11.31.10_1": {
+      "nilai": 7.30,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    }
+  },
+  "2024": {
+    "IDN.11.27.6_1": {
+      "nilai": 9.90052108,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+        "IDN.11.27.12_1": {
+      "nilai": 4.230366,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.5_1": {
+      "nilai": 2.562251895,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.2_1": {
+      "nilai": 1.450725363,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.4_1": {
+      "nilai": 2.281616688,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.8_1": {
+      "nilai": 4.789738594,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.11_1": {
+      "nilai": 4.074464348,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.27.7_1": {
+      "nilai": 0.711053652,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.10_1": {
+      "nilai": 1.521381579,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.3_1": {
+      "nilai": 10.00298597,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.27.13_1": {
+      "nilai": 1.240523777,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.1_1": {
+      "nilai": 2.042883674,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.27.9_1": {
+      "nilai": 1.129271917,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.12_1": {
+      "nilai": 3.89,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.14_1": {
+      "nilai": 4.59,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.8_1": {
+      "nilai": 2.59,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.2_1": {
+      "nilai": 1.61,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.7_1": {
+      "nilai": 4.55,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.31.5_1": {
+      "nilai": 3.33,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.31.3_1": {
+      "nilai": 9.18,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+    "IDN.11.31.13_1": {
+      "nilai": 2.14,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.1_1": {
+      "nilai": 3.07,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.9_1": {
+      "nilai": 1.57,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Rendah",
+        "Kondisi Baik"
+      ]
+    },
+    "IDN.11.31.4_1": {
+      "nilai": 2.59,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.6_1": {
+      "nilai": 1.41,
+      "kategori": "medium",
+      "faktorUtama": [
+        "Tingkat Stunting Sedang",
+        "Perlu Pengawasan"
+      ]
+    },
+    "IDN.11.31.11_1": {
+      "nilai": 3.68,
+      "kategori": "high",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    },
+        "IDN.11.31.10_1": {
+      "nilai": 1.61,
+      "kategori": "low",
+      "faktorUtama": [
+        "Tingkat Stunting Tinggi",
+        "Perlu Intervensi Prioritas"
+      ]
+    }
+  }
+}

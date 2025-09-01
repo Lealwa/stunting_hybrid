@@ -12,24 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     
     <link rel="stylesheet" href="/static/style.css">
-    
-    <style>
-        /* Add this inline style for the no-data message */
-        .no-data-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: #666;
-            font-size: 16px;
-            font-style: italic;
-            width: 100%;
-            background-color: rgba(245, 245, 245, 0.8);
-            padding: 20px;
-            border-radius: 8px;
-        }
-    </style>
 </head>
 <body>
     <div id="map"></div>
@@ -70,12 +52,86 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Default warna semua hijau sampai data tersedia
-        var defaultColor = '#c8cfdb';  // Hijau default
+        // Default warna
+        var defaultColor = '#c8cfdb';
         var stuntingData = {};  // Data akan diisi dari API
+        var availableYears = []; // Tahun yang tersedia
+        var currentYear = null; // Tahun yang dipilih saat ini
+        var currentRegionProps = null;
+
+        // Buat year selector control
+        var yearControl = L.control({position: 'topleft'});
+        
+        yearControl.onAdd = function(map) {
+            var div = L.DomUtil.create('div', 'year-control');
+            div.innerHTML = '<label>Tahun:</label><select id="year-selector"></select>';
+            return div;
+        };
+        
+        yearControl.addTo(map);
+        
+        // Mencegah klik pada kontrol mempengaruhi peta
+        setTimeout(function() {
+            L.DomEvent.disableClickPropagation(document.querySelector('.year-control'));
+        }, 100);
+        
+        // Fungsi untuk memuat daftar tahun yang tersedia
+        function loadAvailableYears() {
+            fetch('/api/available-years')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error("Error loading years:", data.error);
+                        // Fallback ke data default jika gagal
+                        availableYears = ["2020", "2021", "2022", "2023", "2024"];
+                    } else {
+                        availableYears = data.years;
+                    }
+                    
+                    // Populasi year selector
+                    const selector = document.getElementById('year-selector');
+                    selector.innerHTML = ''; // Hapus opsi yang ada
+                    
+                    availableYears.forEach(year => {
+                        const option = document.createElement('option');
+                        option.value = year;
+                        option.textContent = year;
+                        selector.appendChild(option);
+                    });
+                    
+                    // Pilih tahun terbaru secara default
+                    if (availableYears.length > 0) {
+                        const mostRecentYear = availableYears[availableYears.length - 1];
+                        selector.value = mostRecentYear;
+                        currentYear = mostRecentYear;
+                        
+                        // Muat data untuk tahun terbaru
+                        loadClusteringData(mostRecentYear);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching available years:", error);
+                    // Fallback ke data default jika gagal
+                    const years = ["2020", "2021", "2022", "2023", "2024"];
+                    const selector = document.getElementById('year-selector');
+                    
+                    years.forEach(year => {
+                        const option = document.createElement('option');
+                        option.value = year;
+                        option.textContent = year;
+                        selector.appendChild(option);
+                    });
+                    
+                    selector.value = "2024";
+                    currentYear = "2024";
+                    loadClusteringData("2024");
+                });
+        }
 
         // Fungsi untuk mengambil data clustering dan memperbarui peta
-        function loadClusteringData() {
+        function loadClusteringData(year) {
+            const endpoint = year ? `/api/clustering-data?year=${year}` : '/api/clustering-data';
+            
             // Hapus overlay petunjuk setelah data dimuat
             setTimeout(function() {
                 var overlays = document.getElementsByClassName('map-overlay');
@@ -87,12 +143,13 @@
                 }
             }, 5000);
             
-            fetch('/api/clustering-data')
+            fetch(endpoint)
                 .then(response => response.json())
                 .then(data => {
                     if (Object.keys(data).length > 0) {
-                        console.log("Clustering data loaded successfully");
+                        console.log(`Clustering data loaded successfully for year ${year}`);
                         stuntingData = data; // Perbarui data stunting dengan hasil clustering
+                        currentYear = year;
                         
                         // Perbarui warna pada peta
                         if (geojsonLayer) {
@@ -107,14 +164,53 @@
                                 };
                             });
                         }
+                        
+                        // Perbarui judul peta untuk menunjukkan tahun
+                        updateMapTitle(year);
                     } else {
-                        console.log("No clustering data available yet");
+                        console.log(`No clustering data available for year ${year}`);
                     }
                 })
                 .catch(error => {
-                    console.error("Error loading clustering data:", error);
+                    console.error(`Error loading clustering data for year ${year}:`, error);
                 });
         }
+        
+        // Fungsi untuk memperbarui judul peta
+        function updateMapTitle(year) {
+            // Cek jika title container sudah ada
+            let titleContainer = document.getElementById('map-title-container');
+            
+            if (!titleContainer) {
+                // Buat title container jika belum ada
+                titleContainer = document.createElement('div');
+                titleContainer.id = 'map-title-container';
+                titleContainer.className = 'map-title-container';
+                document.body.appendChild(titleContainer);
+            }
+            
+        }
+
+        // Listen for year selector changes
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const yearSelector = document.getElementById('year-selector');
+                if (yearSelector) {
+                    yearSelector.addEventListener('change', function() {
+                        const selectedYear = this.value;
+                        loadClusteringData(selectedYear);
+                        
+                        // If a region is currently selected, update its information for the new year
+                        if (currentRegionProps) {
+                            setTimeout(function() {
+                                updateRegionInfo(currentRegionProps);
+                                updateForecastForRegion(currentRegionProps);
+                            }, 300); // Small delay to ensure clustering data is loaded
+                        }
+                    });
+                }
+            }, 200);
+        });
 
         // Fungsi untuk menentukan kategori berdasarkan nilai stunting
         function getStuntingCategory(value) {
@@ -172,7 +268,18 @@
         function updateRegionInfo(props) {
             var gid = props.GID_3;
             var ccId = props.CC_4;
+            var regionName = props.NAME_3;
             var data = null;
+            var prevalenceValue = null;
+            
+            // Cek jika data prediksi tersedia untuk kecamatan ini
+            if (forecastData && forecastData[regionName] && currentYear) {
+                // Get the data for current selected year from forecast data
+                const forecastYearIndex = forecastData[regionName].labels.indexOf(currentYear);
+                if (forecastYearIndex !== -1 && forecastData[regionName].historical[forecastYearIndex] !== null) {
+                    prevalenceValue = forecastData[regionName].historical[forecastYearIndex];
+                }
+            }
             
             // Cek data berdasarkan CC_3 terlebih dahulu (prioritas)
             if (ccId && stuntingData[ccId]) {
@@ -191,15 +298,36 @@
                 };
             }
             
-            // Update title dengan nama kecamatan
-            document.getElementById('region-title').innerText = 'Kecamatan ' + props.NAME_3;
+            // Update title dengan nama kecamatan dan tahun yang dipilih
+            document.getElementById('region-title').innerText = 'Kecamatan ' + props.NAME_3 + 
+                (currentYear ? ' (' + currentYear + ')' : '');
             
-            // Update nilai prevalensi
+            // Update nilai prevalensi dengan data dari LSTM forecasting jika tersedia untuk tahun yang dipilih
             var categoryClass = data.kategori || 'unknown';
-            document.getElementById('current-prevalence').innerHTML = 
-                'Prevalensi Saat Ini: <span class="' + categoryClass + '">' + data.nilai + '%</span>';
+            if (prevalenceValue !== null) {
+                // Update nilai dengan data dari forecasting untuk tahun yang dipilih
+                document.getElementById('current-prevalence').innerHTML = 
+                    'Prevalensi Saat Ini: <span class="' + categoryClass + '">' + prevalenceValue.toFixed(2) + '%</span>';
+            } else {
+                // Fallback ke data clustering jika forecasting tidak tersedia
+                document.getElementById('current-prevalence').innerHTML = 
+                    'Prevalensi Saat Ini: <span class="' + categoryClass + '">' + data.nilai + '%</span>';
+            }
             
-
+            // Update faktor-faktor jika ada
+            if (data.faktorUtama && data.faktorUtama.length > 0) {
+                var factorsListElement = document.getElementById('factors-list');
+                factorsListElement.innerHTML = '';
+                
+                data.faktorUtama.forEach(function(faktor) {
+                    var li = document.createElement('li');
+                    li.textContent = faktor;
+                    factorsListElement.appendChild(li);
+                });
+                document.getElementById('factors-container').classList.remove('hidden');
+            } else {
+                document.getElementById('factors-container').classList.add('hidden');
+            }
             
             // Pastikan forecast container terlihat
             document.getElementById('forecast-container').classList.remove('hidden');
@@ -248,6 +376,8 @@
             var props = e.target.feature.properties;
             info.update(props);
             
+            currentRegionProps = props;
+            
             // Update info di forecast container dan tampilkan forecast
             updateRegionInfo(props);
             updateForecastForRegion(props);
@@ -281,8 +411,8 @@
                     onEachFeature: onEachFeature
                 }).addTo(map);
                 
-                // Load data clustering setelah peta dimuat
-                loadClusteringData();
+                // Load available years after map is loaded
+                loadAvailableYears();
             });
 
         // Legenda untuk tingkat stunting
@@ -332,9 +462,10 @@
         function showNoForecastData(regionName) {
             const container = document.getElementById('forecast-container');
             
-            // Update title to show the region name
+            // Update title to show the region name and year
             document.getElementById('region-title').innerText = regionName ? 
-                'Kecamatan ' + regionName : 'Tren Prevalensi Stunting';
+                'Kecamatan ' + regionName + (currentYear ? ' (' + currentYear + ')' : '') : 
+                'Tren Prevalensi Stunting';
             
             // Clear prevalence info
             document.getElementById('current-prevalence').innerHTML = '';
@@ -522,7 +653,8 @@
             const selectedRegion = this.value;
             
             if (selectedRegion === 'all_regions') {
-                // Reset to default view for all regions
+                // Reset current region when showing all regions
+                currentRegionProps = null;
                 document.getElementById('region-title').innerText = 'Tren Prevalensi Stunting';
                 document.getElementById('current-prevalence').innerHTML = '';
                 document.getElementById('factors-container').classList.add('hidden');
@@ -546,10 +678,14 @@
                 
                 // Update region info if we found a match
                 if (regionProps) {
+                    // Store current region
+                    currentRegionProps = regionProps;
                     updateRegionInfo(regionProps);
                 } else {
                     // Basic title update if no matching props found
-                    document.getElementById('region-title').innerText = 'Kecamatan ' + selectedRegion;
+                    currentRegionProps = null;
+                    document.getElementById('region-title').innerText = 'Kecamatan ' + selectedRegion + 
+                        (currentYear ? ' (' + currentYear + ')' : '');
                     document.getElementById('factors-container').classList.add('hidden');
                 }
                 
@@ -557,6 +693,7 @@
                 updateForecastChart(forecastData[selectedRegion]);
             } else {
                 // No data for this region
+                currentRegionProps = null;
                 showNoForecastData(selectedRegion);
             }
         });
