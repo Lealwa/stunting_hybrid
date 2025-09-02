@@ -314,20 +314,6 @@
                     'Prevalensi Saat Ini: <span class="' + categoryClass + '">' + data.nilai + '%</span>';
             }
             
-            // Update faktor-faktor jika ada
-            if (data.faktorUtama && data.faktorUtama.length > 0) {
-                var factorsListElement = document.getElementById('factors-list');
-                factorsListElement.innerHTML = '';
-                
-                data.faktorUtama.forEach(function(faktor) {
-                    var li = document.createElement('li');
-                    li.textContent = faktor;
-                    factorsListElement.appendChild(li);
-                });
-                document.getElementById('factors-container').classList.remove('hidden');
-            } else {
-                document.getElementById('factors-container').classList.add('hidden');
-            }
             
             // Pastikan forecast container terlihat
             document.getElementById('forecast-container').classList.remove('hidden');
